@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>YOUR NAME - Task 1</title>
+        <title>Oghenekevbe - Task 1</title>
         <style>.block { background-color:gainsboro; padding:1em; } </style>
     </head>
     <body>
@@ -11,8 +11,14 @@
         <p id="code" class="block"></p>
         <h2>Results of my code:</h2>
         <p id="results" class="block"></p>
+
+
         <script id="task_id">
-            {# INPUT #}
+
+// Your javascript code needs to get the data from the data variable and print them into the HTML element with #results ID in the following format:
+// Article "ARTICLE TITLE" (Page ID PAGEID) was created at MONTH DAY, YEAR.
+// e.g. Article "André Baniwa" (Page ID 6682420) was created at September 12, 2021.
+            
             let data = [
                 {"page_id": 6682420, "creation_date": "2021-09-13", "title": "André Baniwa"},
                 {"page_id": 4246775, "creation_date": "2013-12-10", "title": "Benki Piyãko"},
@@ -28,7 +34,24 @@
                 {"page_id": 6549130, "creation_date": "2021-04-10", "title": "Zezico Guajajara"},
             ];
 
-            {# YOUR CODE HERE #}
+            const results = document.getElementById('results')
+            let display = ''
+            let currentLetter = 'A'
+            data.forEach(item => {
+                
+                //we loop through the date and change the format from YYYY-MM-DY TO MM-DY-YYYY
+                const dateParam = item.creation_date.split('-')
+                const newDateParam = [`${dateParam[1]}-${dateParam[2]}-${dateParam[0]}`]
+                display+=`
+                            <p>${currentLetter}.   Article "${item.title} "(Page ID ${item.page_id}) was created at ${newDateParam}<p>
+
+
+                `
+                currentLetter = String.fromCharCode(currentLetter.charCodeAt(0) + 1)
+
+            });
+            results.innerHTML = display
+            
         </script>
         <script>
             document.getElementById("code").innerText = document.getElementById("task_id").text;
